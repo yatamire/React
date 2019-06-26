@@ -1,19 +1,16 @@
-'use strict';
+"use strict";
 
-var template = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    'Indecision App'
-  ),
-  React.createElement(
-    'p',
-    null,
-    'This is JSX'
-  )
-);
-var appRoot = document.getElementById('app');
+var Mul = {
 
-ReactDOM.render(template, appRoot);
+    numbers: [2, 5, 7],
+    multiplyBy: 5,
+    multiply: function multiply() {
+        var _this = this;
+
+        return this.numbers.map(function (number) {
+            return number * _this.multiplyBy;
+        });
+    }
+};
+
+console.log(Mul.multiply());
