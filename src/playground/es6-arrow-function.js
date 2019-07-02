@@ -18,4 +18,4 @@ let firstname;
 
 const getFirstName = (x) => x.split(' ')[0];
 
-console.log(getFirstName("charlie yan"));
+console.log(getFirstName("charlie yan")); 
