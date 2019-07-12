@@ -1,71 +1,56 @@
-const app = {
-  title: 'Indecision App',
-  subtitle: 'Put your life in the hands of a computer',
-  options: []
-};
+class Header extends React.Component{
+  render(){
+    return (
 
-const onFormSubmit = (e) => {
-  e.preventDefault();
-  const option = e.target.elements.option.value;
-  if(option){
-    app.options.push(option);
-    e.target.elements.option.value = '';
+      <div>
+        <h1>Indecision</h1>
+        <h2>Sub Title</h2>
+      </div>
+
+    );
+
   }
-  render();
-};
-
-const onMakeDecision = () => {
-
-  const randomNum = Math.floor(Math.random() * app.options.length);
-  const option = app.options[randomNum];
-  alert(option);
-
 }
 
-const onRemoveAll = () => {
-
-  app.options = [];
-  render();
-}
-
-
-
-const appRoot = document.getElementById('app');
-
-const render = () => {
-
-  const optionsLI = app.options.map(item => <li>{item}</li>);
-
-  const template = (
-    <div>
-      <h1>{app.title}</h1>
-      {app.subtitile && <p>{app.subtitle}</p>}
-      <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
-      <button onClick={onMakeDecision} disabled={app.options.length === 0}>What should I do?</button>
-      <button onClick={onRemoveAll}>Remove All</button>
-      <ol>      
-        {optionsLI}
-      </ol>
-      <form onSubmit={onFormSubmit}>
-        <input type='text' name='option'></input>
-        <button>Add Option</button>
-      </form>
-    </div>
-  );
-
-  ReactDOM.render(template, appRoot);
-}
-
-render();
-
-
-
+class Option extends React.Component{
+  render(){
+    this.optionsLI = this.options.map(item => <li>{item}</li>);
+    return(
+      <div>
+        <ol>      
+          {this.optionsLI}
+        </ol>
+        <form onSubmit={this.addOptions}>
+          <input type='text' name='option'></input>
+          <button>Add Option</button>
+        </form>
+      </div>
+    );
+  }
+  constructor(){
+    super();
+    this.options = [];
+    this.addOptions = (e) =>{
+      e.preventDefault();
+      const option = e.target.elements.option.value.trim();
+      if(option){
+        this.options.push(option);
+        e.target.elements.option.value = '';
+      }
+      this.render();
+    };
+  }
   
+}
 
+const jsx = (
+
+  <div>
+      <h1>Title</h1>
+      <Header/>
+      <Option/>
+  </div>
+)
  
 
-
-  
-
-
-
+ReactDOM.render(jsx, document.getElementById('app'))
